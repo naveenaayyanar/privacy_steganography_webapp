@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Stega_Naveena — Where privacy meets innovation.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.2/dist/tailwind.min.css" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0f172a 0%, #0ea5e9 100%);
+      color: #d1d5db;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #1e293b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background-color: #60a5fa;
+      border-radius: 20px;
+      border: 3px solid #1e293b;
+    }
+
+    /* Title with unique outer line */
+    #main-logo {
+      position: relative;
+      font-weight: 900;
+      font-size: 4rem;
+      color: #d1d5db;
+      letter-spacing: -.02em;
+      line-height: 1;
+      padding: 2rem 3rem;
+      text-align: center;
+      margin: 0 auto;
+      width: min(90%, 720px);
+      user-select: none;
+    }
+    #main-logo::before {
+      content: '';
+      position: absolute;
+      top: -0.5rem;
+      left: -0.5rem;
+      right: -0.5rem;
+      bottom: -0.5rem;
+      border-radius: 2rem;
+      pointer-events: none;
+      box-shadow:
+          0 0 0 4px #60a5fa,
+          0 0 20px 12px #0ea5e9,
+          inset 0 0 40px 16px #0ea5e9;
+      z-index: -1;
+    }
+
+    /* Nav */
+    header nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1.5rem;
+      color: #d1d5db;
+      font-weight: 600;
+    }
+    header nav a {
+      color: #d1d5db;
+      position: relative;
+      transition: color 0.3s ease;
+      font-size: 1.125rem;
+      text-decoration: none;
+    }
+    header nav a::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -6px;
+      width: 0%;
+      height: 2px;
+      background-color: #60a5fa;
+      border-radius: 2px;
+      transition: width 0.35s ease;
+      box-shadow: 0 0 6px 1px #60a5fa;
+    }
+    header nav a:hover,
+    header nav a:focus-visible {
+      color: #60a5fa;
+      outline: none;
+    }
+    header nav a:hover::after,
+    header nav a:focus-visible::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero-container {
+      position: relative;
+      max-width: 960px;
+      margin: 3rem auto 6rem;
+      padding: 0 1rem;
+      text-align: center;
+      color: #bfdbfe;
+      user-select: none;
+    }
+    .hero-container h1 {
+      font-size: 3.5rem;
+      font-weight: 900;
+      letter-spacing: -0.025em;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      color: white;
+      text-shadow:
+        0 0 15px #60a5fa,
+        0 0 30px #2563eb;
+    }
+    .hero-container p {
+      max-width: 720px;
+      margin: 0 auto 3rem;
+      font-weight: 600;
+      font-size: 1.25rem;
+      line-height: 1.5;
+      color: #cbd5e1;
+      text-shadow: 0 1px 2px rgb(0 0 0 / 0.3);
+    }
+    .cta-button {
+      background-color: #2563eb;
+      color: white;
+      font-weight: 700;
+      font-size: 1.25rem;
+      padding: 1.25rem 3rem;
+      border-radius: 1.25rem;
+      cursor: pointer;
+      user-select: none;
+      box-shadow:
+        0 4px 16px rgba(37, 99, 235, 0.6),
+        0 0 12px rgba(37, 99, 235, 0.8);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+      border: none;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .cta-button:hover,
+    .cta-button:focus-visible {
+      background-color: #1e40af;
+      box-shadow:
+        0 8px 24px rgba(37, 99, 235, 0.9),
+        0 0 28px 8px rgba(37, 99, 235, 1);
+      outline: none;
+      transform: scale(1.03);
+    }
+    .cta-button:active {
+      transform: scale(0.98);
+      box-shadow:
+        0 2px 10px rgba(37, 99, 235, 0.5);
+    }
+
+    /* Main grid container */
+    main {
+      max-width: 1200px;
+      margin: 0 auto 6rem;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4rem;
+      padding: 0 1rem;
+    }
+    @media(min-width: 768px) {
+      main {
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+      }
+    }
+
+    /* Cards */
+    section.card {
+      background: #ffffffcc;
+      backdrop-filter: saturate(200%) blur(16px);
+      border-radius: 0.75rem;
+      box-shadow: 0 8px 24px rgb(37 99 235 / 0.15);
+      padding: 3rem 2.5rem;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+    }
+    section.card:hover, section.card:focus-within {
+      box-shadow:
+        0 12px 40px rgb(37 99 235 / 0.35),
+        0 0 32px 8px rgb(37 99 235 / 0.4);
+      transform: translateY(-5px);
+      outline: none;
+      z-index: 1;
+      position: relative;
+    }
+
+    /* Section titles with icon */
+    h2.icon-title {
+      font-weight: 800;
+      font-size: 1.875rem;
+      margin-bottom: 2rem;
+      color: #2563eb;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    h2.icon-title svg {
+      width: 30px;
+      height: 30px;
+      stroke-width: 2.5;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      stroke: currentColor;
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    /* Form labels and inputs */
+    label {
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+      color: #374151;
+      user-select: text;
+    }
+    input[type="file"] {
+      border-radius: 0.5rem;
+      cursor: pointer;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      font-size: 1rem;
+      border: 2px solid #2563eb;
+      background: transparent;
+      color: #2563eb;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      box-shadow: 0 0 10px rgb(37 99 235 / 0.35);
+    }
+    input[type="file"]:hover {
+      background-color: #e0e7ff88;
+    }
+    input[type="file"]:focus-visible {
+      outline: none;
+      box-shadow: 0 0 15px 4px rgb(37 99 235 / 0.7);
+      background-color: #e0e7ffaa;
+    }
+    textarea {
+      border-radius: 0.75rem;
+      border: 2px solid #2563eb;
+      font-size: 1.1rem;
+      line-height: 1.4;
+      padding: 1rem 1.25rem;
+      resize: vertical;
+      min-height: 140px;
+      color: #111827;
+      user-select: text;
+      box-shadow: 0 0 12px rgb(37 99 235 / 0.2);
+      transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+    textarea:focus {
+      outline: none;
+      box-shadow: 0 0 20px 4px rgb(37 99 235 / 0.6);
+      border-color: #1e40af;
+      background-color: #e0e7ff;
+    }
+
+    /* Buttons */
+    button {
+      margin-top: auto;
+      border-radius: 1.25rem;
+      border: none;
+      background-color: #2563eb;
+      color: white;
+      font-weight: 700;
+      font-size: 1.25rem;
+      padding: 1.25rem 3rem;
+      box-shadow:
+        0 4px 16px rgb(37 99 235 / 0.55),
+        0 0 12px rgb(37 99 235 / 0.85);
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.35s ease, transform 0.2s ease;
+      user-select: none;
+      align-self: center;
+      max-width: 320px;
+    }
+    button:hover,
+    button:focus-visible {
+      background-color: #1e40af;
+      box-shadow:
+        0 8px 24px rgb(37 99 235 / 0.9),
+        0 0 24px 8px rgb(37 99 235 / 1);
+      outline: none;
+      transform: scale(1.05);
+    }
+    button:active {
+      transform: scale(0.95);
+      box-shadow:
+        0 2px 10px rgb(37 99 235 / 0.5);
+    }
+
+    /* Extracted text output */
+    #extractedText {
+      background: #e0e7ff;
+      color: #1e3a8a;
+      font-family: 'Fira Mono', monospace, monospace;
+      font-size: 1rem;
+      border-radius: 0.75rem;
+      padding: 1rem 1.5rem;
+      border: 2px solid #2563eb;
+      min-height: 6rem;
+      user-select: text;
+      box-shadow: 0 0 14px #3b82f6cc;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      
+      color: #94a3b8;
+      font-weight: 600;
+      
+    }
+
+    /* Responsive spacing */
+    @media (max-width: 767px) {
+      #main-logo {
+        font-size: 3rem;
+        padding: 1.25rem 2rem;
+      }
+      main {
+        grid-template-columns: 1fr !important;
+        gap: 3rem !important;
+        padding: 0 1rem !important;
+      }
+      .hero-container h1 {
+        font-size: 2.75rem !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Title centered with unique outer line -->
+  <div id="main-logo" role="banner" aria-label="Behind closed doors">
+    Behind closed doors
+  </div>
+
+  <!-- Sticky nav on top right with links -->
+  <header>
+    <nav aria-label="Primary navigation">
+      <a href="#hide-section">Hide Text</a>
+      <a href="#extract-section">Extract Text</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-container" role="main" aria-label="Hero Section introduction">
+    <h1>Protect your privacy with seamless steganography</h1>
+    <p>Hide secret text messages inside your files and extract them easily using Stega_Naveena – where privacy meets innovation.</p>
+    <a href="#hide-section" class="cta-button" role="button" tabindex="0">Get Started</a>
+  </section>
+
+  <!-- Main content sections -->
+  <main>
+    <!-- Hide Text Card -->
+    <section id="hide-section" class="card" aria-labelledby="hideSectionTitle" tabindex="0" role="region">
+      <h2 id="hideSectionTitle" class="icon-title">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c.167 0 .333.003.5.01 1.322.068 2.5 1.254 2.5 2.49v.5a2.5 2.5 0 01-5 0v-.5c0-1.236 1.178-2.422 2.5-2.49a2.192 2.192 0 01.5-.01zM12 17v4m0 0H8m4 0h4"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3a7 7 0 00-7 7v4a7 7 0 007 7 7 7 0 007-7v-4a7 7 0 00-7-7z"></path>
+        </svg>
+        Hide Text in File
+      </h2>
+      <form id="hideForm" autocomplete="off">
+        <label for="hideFile">Select a file (.doc, .xel, .exe, .png, .pdf, .jpeg, etc.)</label>
+        <input type="file" id="hideFile" name="file" required accept=".doc,.docx,.xel,.exe,.png,.pdf,.jpeg,.jpg" />
+        <label for="message">Text message to hide</label>
+        <textarea id="message" name="message" rows="5" placeholder="Enter your secret message here..." required></textarea>
+        <button type="submit" aria-label="Hide text and download file">Hide Text &amp; Download</button>
+        <p id="hideStatus" aria-live="polite" style="min-height:1.5rem;"></p>
+      </form>
+    </section>
+
+    <!-- Extract Text Card -->
+    <section id="extract-section" class="card" aria-labelledby="extractSectionTitle" tabindex="0" role="region">
+      <h2 id="extractSectionTitle" class="icon-title">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></circle>
+          <path stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+        </svg>
+        Extract Text from File
+      </h2>
+      <form id="extractForm" autocomplete="off">
+        <label for="extractFile">Upload a steganography file to extract hidden text</label>
+        <input type="file" id="extractFile" name="file" required />
+        <button type="submit" aria-label="Extract hidden text from file">Extract Text</button>
+        <div id="extractedText" tabindex="0" aria-live="polite"></div>
+        <p id="extractStatus" aria-live="polite" style="min-height:1.5rem;"></p>
+      </form>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    Designed and Developed by Naveena
+
+  </footer>
+
+  <script>
+    const hideForm = document.getElementById('hideForm');
+    const hideStatus = document.getElementById('hideStatus');
+    const extractForm = document.getElementById('extractForm');
+    const extractedText = document.getElementById('extractedText');
+    const extractStatus = document.getElementById('extractStatus');
+
+    function downloadBlob(blob, filename) {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      setTimeout(() => {
+        URL.revokeObjectURL(url);
+        a.remove();
+      }, 100);
+    }
+
+    hideForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideStatus.textContent = '';
+      const fileInput = hideForm.file;
+      const messageInput = hideForm.message;
+
+      if (!fileInput.files.length) {
+        hideStatus.textContent = 'Please select a file.';
+        return;
+      }
+      if (!messageInput.value.trim()) {
+        hideStatus.textContent = 'Please enter a message to hide.';
+        return;
+      }
+
+      hideStatus.textContent = 'Processing...';
+
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+      formData.append('message', messageInput.value.trim());
+
+      try {
+        const response = await fetch('/hide', {
+          method: 'POST',
+          body: formData,
+        });
+        if (!response.ok) throw new Error('Failed to hide the message in the file.');
+        const blob = await response.blob();
+        const filename = fileInput.files[0].name;
+        downloadBlob(blob, 'steg_' + filename);
+        hideStatus.textContent = 'Success! File with hidden text downloaded.';
+        hideForm.reset();
+      } catch (error) {
+        hideStatus.textContent = 'Error: ' + error.message;
+      }
+    });
+
+    extractForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      extractStatus.textContent = '';
+      extractedText.textContent = '';
+
+      const fileInput = extractForm.file;
+
+      if (!fileInput.files.length) {
+        extractStatus.textContent = 'Please select a file to extract.';
+        return;
+      }
+
+      extractStatus.textContent = 'Extracting...';
+
+      const formData = new FormData();
+      formData.append('file', fileInput.files[0]);
+
+      try {
+        const response = await fetch('/extract', {
+          method: 'POST',
+          body: formData,
+        });
+        if (!response.ok) throw new Error('Failed to extract message.');
+        const data = await response.json();
+        if (data.message) {
+          extractedText.textContent = data.message;
+          extractStatus.textContent = 'Text successfully extracted.';
+        } else {
+          extractedText.textContent = '';
+          extractStatus.textContent = 'No hidden text found in the file.';
+        }
+        extractForm.reset();
+      } catch (error) {
+        extractStatus.textContent = 'Error: ' + error.message;
+      }
+    });
+  </script>
+</body>
+</html>
+
